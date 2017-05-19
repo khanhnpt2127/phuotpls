@@ -5,9 +5,35 @@
     xmlns:local="using:phuotpls.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <DataTemplate x:Key="HamburgerMenuItem" x:DataType="controls:HamburgerMenuGlyphItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <FontIcon Glyph="{x:Bind Glyph}" FontFamily="Segoe MDL2 Assets"
+                          Margin="12,12,11,12"/>
+                <TextBlock Grid.Column="1"
+                           FontSize="16"
+                           Text="{x:Bind Label}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <controls:HamburgerMenu x:Name="MainHamburgerMenu"
+                                CompactPaneLength="48"
+                                OpenPaneLength="240"
+                                DisplayMode="CompactInline"
+                                HamburgerHeight="48"
+                                IsPaneOpen="False">
+            
+            
+        </controls:HamburgerMenu>
     </Grid>
 </Page>
