@@ -122,9 +122,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\UserAccountsController.cs" />
+    <Compile Include="Controllers\UserProfilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Follower.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\PhuotApiContext.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserAccountStatus.cs" />
@@ -146,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Models\DTOModels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

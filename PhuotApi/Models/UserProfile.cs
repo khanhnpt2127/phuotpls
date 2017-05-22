@@ -13,9 +13,18 @@ namespace PhuotApi.Models
             
         }
 
+        [Key]
         public int Id { get; set; }
+
+        [MaxLength(100)]
+        [Required]
         public string FirstName { get; set; }
+
+        [MaxLength(100)]
+        [Required]
         public string LastName { get; set; }
+
+        [MaxLength(300)]
         public string Bio { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
