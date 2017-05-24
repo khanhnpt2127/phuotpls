@@ -18,6 +18,7 @@ namespace PhuotApi.Models
         public DbSet<UserAccountStatus> UserAccountStatuses { get; set; }
         public DbSet<UserPictureProfile> UserPictureProfiles { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Follower> Followers { get; set; }
 
     }
 }

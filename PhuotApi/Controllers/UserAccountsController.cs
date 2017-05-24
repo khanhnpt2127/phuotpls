@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using PhuotApi.Models;
-
 namespace PhuotApi.Controllers
 {
     public class UserAccountsController : ApiController
@@ -17,39 +12,50 @@ namespace PhuotApi.Controllers
 
         [Route("api/account/{id:int}")]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateUserAccount(int id, UserAccount userAccount)
+        public async Task<IHttpActionResult> CreateUserAccount(int id, [FromBody]UserInfo fu)
         {
-            if (id != userAccount.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != userAccount.Id)
+            //{
+            //    return BadRequest();
+            //}
+            byte[] saltPassword = PasswordCalculating.GeneratedSaltPassword();
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            DbContext.UserAccounts.Add(userAccount);
+            DbContext.UserAccounts.Add(new UserAccount()
+            {
+                Email = fu.email,
+                SaltPassword = Convert.ToBase64String(saltPassword),
+                HashPassword = PasswordCalculating.EncryptPassword(fu.password, saltPassword),
+                Id = id,
+                UserName = fu.username,
+                StatusId = fu.statusId
+            });
+            //DbContext.UserAccounts.Add(userAccount);
             await DbContext.SaveChangesAsync();
-
 
             //For test, changing later
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //Change password
-        [Route("api/account/change-password/{id}")]
-        public async Task<IHttpActionResult> ChangePassword(int id, string oldHashPassword, string oldSaltpassword, string newHashPassword, string newSaltPassword)
+        //[Route("api/account/{username}")]
+        //[HttpPut]
+        //public IHttpActionResult UpdatePassword(string username, string oldPassword)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //}
+        public bool CheckPassword(string username, string hashpassword)
         {
-            var find = await DbContext.UserAccounts.FindAsync(id);
-            if (find == null)
+            if (DbContext.UserAccounts.FirstOrDefault(x => x.UserName == username && x.HashPassword == hashpassword) != null)
             {
-                return BadRequest();
+                return true;
             }
-
-            //true if old hash password and old salt password are both correct in database
-            if (oldHashPassword == find.HashPassword && oldSaltpassword == find.SaltPassword)
-            {
-
-            }
+            return false;
         }
     }
 }

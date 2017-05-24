@@ -21,19 +21,22 @@ namespace PhuotApi.Models
         [Column(TypeName = "varchar")]
         public string UserName { get; set; }
 
-        [Required]
+        [Column(TypeName = "varchar")]
         public string HashPassword { get; set; }
 
-        [Required]
+        [Column(TypeName = "varchar")]
         public string SaltPassword { get; set; }
 
         [Required]
         [Column(TypeName = "varchar")]
         public string Email { get; set; }
 
-        [Required]
+        [Column(TypeName = "varchar")]
         public string EmailConfirmToken { get; set; }
 
+        [Required]
+        [ForeignKey("UserAccountStatus")]
+        public int StatusId { get; set; }
         public virtual UserProfile UserProfile { get; set; }
         public virtual UserAccountStatus UserAccountStatus { get; set; }
     }

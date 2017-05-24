@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,7 @@ namespace PhuotApi.Models
     {
         public UserProfile()
         {
-            
+            this.Follower = new HashSet<Follower>();
         }
 
         [Key]
@@ -32,10 +33,13 @@ namespace PhuotApi.Models
         public string ZipCode { get; set; }
         public string PhoneNumber { get; set; }
 
+        [ForeignKey("UserPictureProfile")]
+        public int PictureId { get; set; }
         //Each user only has one picture profile
         //Foreign key
         public virtual UserPictureProfile UserPictureProfile { get; set; }
 
         public virtual UserAccount UserAccount { get; set; }
+        public virtual ICollection<Follower> Follower { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace PhuotApi.Controllers
 
         
         // GET: api/UserProfiles/5
-        [ResponseType(typeof(UserProfile))]
         [Route("api/user/{id}")]
         public async Task<IHttpActionResult> GetUserProfilebyId(int id)
         {
@@ -33,7 +32,6 @@ namespace PhuotApi.Controllers
         }
 
         // PUT: api/UserProfiles/5
-        [ResponseType(typeof(void))]
         [HttpPut]
         [Route("api/user/{id}")]
         public async Task<IHttpActionResult> UpdateUserProfile(int id, UserProfile userProfile)
@@ -70,9 +68,8 @@ namespace PhuotApi.Controllers
         }
 
         // POST: api/UserProfiles
-        [ResponseType(typeof(UserProfile))]
         [HttpPost]
-        [Route("api/user")]
+        [Route("api/user",Name = "PostUser")]
         public async Task<IHttpActionResult> CreateNewUser(UserProfile userProfile)
         {
             if (!ModelState.IsValid)
@@ -83,17 +80,17 @@ namespace PhuotApi.Controllers
             db.UserProfiles.Add(userProfile);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = userProfile.Id }, userProfile);
+            return CreatedAtRoute("PostUser", new { id = userProfile.Id }, userProfile);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
         private bool UserProfileExists(int id)
         {
