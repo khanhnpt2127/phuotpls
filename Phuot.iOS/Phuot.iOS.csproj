@@ -129,5 +129,11 @@
   <ItemGroup>
     <Content Include="Entitlements.plist" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Phuot.Core\Phuot.Core.csproj">
+      <Project>{5c196ef0-0194-4ae7-b1db-1d377ac8ab29}</Project>
+      <Name>Phuot.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
