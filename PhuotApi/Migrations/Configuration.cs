@@ -29,35 +29,65 @@ namespace PhuotApi.Migrations
             //    );
             //
             context.UserAccountStatuses.AddOrUpdate(x => x.StatusId,
+
                 new UserAccountStatus()
+
                 {
+
                     StatusId = 1,
+
                     Status = "CONFIRMED"
+
                 },
+
                 new UserAccountStatus()
+
                 {
+
                     StatusId = 2,
+
                     Status = "NON_CONFIRMED"
+
                 });
+            context.SaveChanges();
             context.UserProfiles.AddOrUpdate(x => x.Id,
+
                 new UserProfile()
+
                 {
+
                     Id = 1,
+
                     FirstName = "Vu",
+
                     LastName = "Nguyen"
+
                 },
+
                 new UserProfile()
+
                 {
+
                     Id = 2,
+
                     FirstName = "Edmund",
+
                     LastName = "Nguyen"
+
                 },
+
                 new UserProfile()
+
                 {
+
                     Id = 3,
+
                     FirstName = "Minh",
+
                     LastName = "Nguyen"
+
                 });
+            context.SaveChanges();
         }
     }
 }

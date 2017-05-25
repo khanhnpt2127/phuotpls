@@ -21,11 +21,12 @@ namespace PhuotApi.Models
         [Column(TypeName = "varchar")]
         public string UserName { get; set; }
 
+        [Required]
         [Column(TypeName = "varchar")]
         public string HashPassword { get; set; }
 
-        [Column(TypeName = "varchar")]
-        public string SaltPassword { get; set; }
+        [Required]
+        public byte[] SaltPassword { get; set; }
 
         [Required]
         [Column(TypeName = "varchar")]

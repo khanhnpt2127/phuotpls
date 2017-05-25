@@ -20,5 +20,9 @@ namespace PhuotApi.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Follower> Followers { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -128,13 +128,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705241428570_Initial1.cs" />
-    <Compile Include="Migrations\201705241428570_Initial1.Designer.cs">
-      <DependentUpon>201705241428570_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705241456408_Initial.cs" />
-    <Compile Include="Migrations\201705241456408_Initial.Designer.cs">
-      <DependentUpon>201705241456408_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201705250724321_Initial.cs" />
+    <Compile Include="Migrations\201705250724321_Initial.Designer.cs">
+      <DependentUpon>201705250724321_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Follower.cs" />
@@ -154,6 +150,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\PhuotApi20170524101053 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -166,15 +163,12 @@
     <Folder Include="Models\DTOModels\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705241428570_Initial1.resx">
-      <DependentUpon>201705241428570_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705241456408_Initial.resx">
-      <DependentUpon>201705241456408_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <EmbeddedResource Include="Migrations\201705250724321_Initial.resx">
+      <DependentUpon>201705250724321_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
