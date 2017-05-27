@@ -15,7 +15,8 @@ namespace PhuotApi.Models
         }
 
         [Key, ForeignKey("UserProfile")]
-        public int Id { get; set; }
+        [Column(TypeName = "uniqueidentifier")]
+        public Guid Id { get; set; }
 
         [Required]
         [Column(TypeName = "varchar")]

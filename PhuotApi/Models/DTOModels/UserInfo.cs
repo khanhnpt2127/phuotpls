@@ -10,7 +10,10 @@ namespace PhuotApi.Models
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public int statusId { get; set; } = 2;
+        public int statusId { get; set; }
+        public string oldPassword { get; set; }
+        public string newPassword { get; set; }
+
 
     }
 }

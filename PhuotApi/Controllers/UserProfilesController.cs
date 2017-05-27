@@ -20,7 +20,7 @@ namespace PhuotApi.Controllers
         
         // GET: api/UserProfiles/5
         [Route("api/user/{id}")]
-        public async Task<IHttpActionResult> GetUserProfilebyId(int id)
+        public async Task<IHttpActionResult> GetUserProfilebyId(Guid id)
         {
             UserProfile userProfile = await db.UserProfiles.FindAsync(id);
             if (userProfile == null)
@@ -34,7 +34,7 @@ namespace PhuotApi.Controllers
         // PUT: api/UserProfiles/5
         [HttpPut]
         [Route("api/user/{id}")]
-        public async Task<IHttpActionResult> UpdateUserProfile(int id, UserProfile userProfile)
+        public async Task<IHttpActionResult> UpdateUserProfile(Guid id, UserProfile userProfile)
         {
             if (!ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace PhuotApi.Controllers
         //    base.Dispose(disposing);
         //}
 
-        private bool UserProfileExists(int id)
+        private bool UserProfileExists(Guid id)
         {
             return db.UserProfiles.Count(e => e.Id == id) > 0;
         }

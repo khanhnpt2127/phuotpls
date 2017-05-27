@@ -5,6 +5,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using PhuotApi.Models;
+using PhuotApi.Models.DTOModels;
+using static System.String;
 
 namespace PhuotApi.Controllers
 {
@@ -12,9 +14,9 @@ namespace PhuotApi.Controllers
     {
         PhuotApiContext DbContext = new PhuotApiContext();
 
-        [Route("api/account/{id:int}")]
+        [Route("api/account/{id}")]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateUserAccount(int id, [FromBody] UserInfo fu)
+        public async Task<IHttpActionResult> CreateUserAccount(Guid id, [FromBody] UserInfo fu)
         {
             //if (id != userAccount.Id)
             //{
@@ -32,27 +34,20 @@ namespace PhuotApi.Controllers
                 HashPassword = PasswordCalculating.EncryptPassword(fu.password, saltPassword),
                 Id = id,
                 UserName = fu.username,
-                StatusId = fu.statusId
+                StatusId = fu.statusId = 2
             });
             //DbContext.UserAccounts.Add(userAccount);
-            try
-            {
-                await DbContext.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            await DbContext.SaveChangesAsync();
 
 
             //For test, changing later
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.Created);
         }
 
+        //Change password via username (inside app)
         [Route("api/account/{username}")]
         [HttpPut]
-        public async Task<IHttpActionResult> UpdatePassword(string username, [FromBody]string oldPassword, [FromBody]string newPassword)
+        public async Task<IHttpActionResult> UpdatePassword(string username, [FromBody] UserInfo fu)
         {
             var finduserName = DbContext.UserAccounts.FirstOrDefault(x => x.UserName == username);
             if (!ModelState.IsValid)
@@ -63,13 +58,13 @@ namespace PhuotApi.Controllers
             {
                 return BadRequest();
             }
-            string hashpw = PasswordCalculating.EncryptPassword(oldPassword, finduserName.SaltPassword);
+            string hashpw = PasswordCalculating.EncryptPassword(fu.oldPassword, finduserName.SaltPassword);
             if (!String.Equals(hashpw, finduserName.HashPassword))
             {
                 return BadRequest();
             }
             finduserName.SaltPassword = PasswordCalculating.GeneratedSaltPassword();
-            finduserName.HashPassword = PasswordCalculating.EncryptPassword(newPassword, finduserName.SaltPassword);
+            finduserName.HashPassword = PasswordCalculating.EncryptPassword(fu.newPassword, finduserName.SaltPassword);
 
             try
             {
@@ -83,6 +78,8 @@ namespace PhuotApi.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+
         public bool CheckPassword(string username, string hashpassword)
         {
             if (DbContext.UserAccounts.FirstOrDefault(x => x.UserName == username && x.HashPassword == hashpassword) != null)

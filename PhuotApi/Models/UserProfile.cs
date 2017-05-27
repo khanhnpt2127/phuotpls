@@ -15,7 +15,8 @@ namespace PhuotApi.Models
         }
 
         [Key]
-        public int Id { get; set; }
+        [Column(TypeName = "uniqueidentifier")]
+        public Guid Id { get; set; }
 
         [MaxLength(100)]
         [Required]

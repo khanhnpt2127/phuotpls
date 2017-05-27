@@ -15,8 +15,9 @@ namespace PhuotApi.Models
         }
 
         [Key, ForeignKey("UserProfile")]
-        public int PictureId { get; set; }
-        public byte[] PictureProfile { get; set; }
+        [Column(TypeName = "uniqueidentifier")]
+        public Guid PictureId { get; set; }
+        public string PictureProfile { get; set; }
 
         public virtual UserProfile UserProfile  { get; set; }
     }
