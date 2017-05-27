@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Phuot.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Phuot.iOS</AssemblyName>
+    <AssemblyName>PhuotiOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
